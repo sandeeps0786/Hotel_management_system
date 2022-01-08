@@ -1,3 +1,5 @@
+package com.company;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -6,33 +8,26 @@ public class Hotel {
     private static Hotel instance;
     private String hotelName;
     private String hotelAddress;
-    private Restaurant restaurant;
+    public Restaurant restaurant;
     public List<Room> room = new ArrayList<>();
     public List<Customer> customers = new ArrayList<>();
+    public List<Employee> employee = new ArrayList<>();
 
+    public Hotel() {
+
+    }
+
+    //    private static final Hotel INSTANCE = new Hotel("CRESCENT","HUBLI");  //edit
     public static Hotel getInstance() {
         return instance;
     }
+
 
     public static void setInstance(Hotel instance) {
         Hotel.instance = instance;
     }
 
-    public String getHotelName() {
-        return hotelName;
-    }
 
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
-    }
-
-    public String getHotelAddress() {
-        return hotelAddress;
-    }
-
-    public void setHotelAddress(String hotelAddress) {
-        this.hotelAddress = hotelAddress;
-    }
 
     public Restaurant getRestaurant() {
         return restaurant;
@@ -46,41 +41,52 @@ public class Hotel {
         return room;
     }
 
-    private Hotel(){}
+
     public static synchronized Hotel getHotel(){
         if(instance == null){
-            instance = new Hotel();
+            instance = new Hotel("TAJHOTEL","MUMBAI");
         }
         return instance;
     }
 
+    protected Hotel(String Hotelname, String address)
+    {
+        this.hotelName=Hotelname;
+        this.hotelAddress=address;
+    }
+
     public void setHotel(Restaurant r,List<Room> rs){
-        for(int i=0;i<6;i++){
-            this.room.set(i,rs.get(i));
+//        System.out.println(rs.size());
+//        System.out.println(r.dishes.size());
+        int roomsize=rs.size();
+        int dishsize=r.dishes.size();
+        for(int i=0;i<roomsize;i++){
+           this.room.add(rs.get(i));
         }
-        for(int i=0;i<8;i++){
-            this.restaurant.dishes.set(i,r.dishes.get(i));
+        for(int i=0;i<dishsize;i++){
+            this.restaurant.dishes.add(r.dishes.get(i));
         }
     }
 
     public void generateID(Customer c){
         String id = String.valueOf(new Random().nextInt(1000));
-        c.setCustID(id);
+        c.custID=id;
+
     }
     public Room getRoom(int rno){
-        for(Room r:room){
-            if(r.getRoomNo() == rno){
-                return r;
+        for(int i=0;i<room.size();i++){
+            if(room.get(i).roomNo == rno){
+                return room.get(i);
             }
         }
         return null;
     }
     public void displayAvailble(){
         System.out.println("---------------------------------------------Room Details----------------------------------------------");
-        System.out.println("Room Type"+"     "+"Number of Beds"+"     "+"Rent"+"     "+"Room Number");
-        for(Room r: room){
-            if(r.getStatus() ==0){
-                System.out.println(r.getRoomType()+"     "+r.getNoOfBeds()+"     "+r.getRent()+"     "+r.getRoomNo());
+        System.out.println("Room Type"+"  "+"Number of Beds"+"  "+"Rent"+"  "+"Room Number");
+        for(int i=0;i<room.size();i++){
+            if(room.get(i).status ==0){
+                System.out.println(room.get(i).roomType+"     "+room.get(i).noOfBeds+"     "+room.get(i).rent+"     "+room.get(i).roomNo);
             }
         }
     }
@@ -89,23 +95,23 @@ public class Hotel {
         System.out.println("----------------------------------------------Menu-------------------------------------------------");
         System.out.println("Dish Name"+"     "+"Price"+"     "+"Dish Type");
         for(Dish d: restaurant.dishes){
-            System.out.println(d.getDishName()+"     "+d.getPrice()+"     "+d.getDishType());
+            System.out.println(d.dishName+"     "+d.price+"     "+d.dishType);
         }
     }
 
     public void bookRoom(int r){
         for(Room room:room){
-            if(room.getRoomNo()==r){
-                room.setStatus(1);
+            if(room.roomNo==r){
+                room.status=1;
             }
         }
     }
     public void vacateRoom(int rno){
         int j=0;
         for(Room room:room){
-            if(room.getRoomNo()==rno){
+            if(room.roomNo==rno){
                 j=1;
-                room.setStatus(0);
+                room.status=0;
                 System.out.println("Thank You! Visit Again.");
                 break;
             }
@@ -118,7 +124,7 @@ public class Hotel {
     public void takeOrder(String dnm){
         int j=0;
         for(Dish d:restaurant.dishes){
-            if(d.getDishName().equalsIgnoreCase(dnm)){
+            if(d.dishName.equalsIgnoreCase(dnm)){
                 j=1;
                 System.out.println("Order Successful");
                 break;
@@ -129,6 +135,16 @@ public class Hotel {
         }
     }
 
+    void getCustomerData(Customer c)
+    {
+        System.out.println("Name :: "+c.custName);
+        System.out.println("Address :: "+c.custAddress);
+        System.out.println("phone :: "+c.custPhone);
+        System.out.println("Email :: "+c.custPhone);
+        System.out.println("Check-In Time :: "+c.checkInTime);
+    }
 
+     void askFeedback()
+     {}
 
 }

@@ -1,8 +1,8 @@
-package designPatterns.project;
+package com.company;
 
 import java.util.Scanner;
 
-abstract class Customer
+public abstract class Customer
 {
     public String custName;
     public String custAddress;
@@ -11,6 +11,7 @@ abstract class Customer
     public String custEmail;
     public String checkInTime;
     public int status;
+
 
     public Customer()
     {
@@ -27,31 +28,36 @@ abstract class Customer
 
     void setData()
     {
-        Scanner sc=new Scanner(System.in);
 
+        Scanner sc=new Scanner(System.in);
         String dt=java.time.LocalTime.now().toString();
         this.checkInTime = dt;
 
-        System.out.println("Enter your Name :\n");
+        System.out.println("Enter your Name :");
         this.custName=sc.nextLine();
+        System.out.println("customer Name:: "+this.custName);
 
-        System.out.println("Enter your Address :\n");
+        System.out.println("Enter your Address :");
         this.custAddress=sc.nextLine();
+        System.out.println("customer Address :: "+this.custAddress);
 
-        System.out.println("Enter your Phone number :\n");
+        System.out.println("Enter your Phone number :");
         this.custPhone=sc.nextLong();
+        System.out.println("custome Phone:: "+this.custPhone);
 
-        System.out.println("Enter your Email :\n");
-        this.custEmail=sc.nextLine();
+        System.out.println("Enter your Email :");
+        this.custEmail= sc.next();
+        System.out.println("customer email:: "+ this.custEmail);
 
     }
 
     int selectChoice()
     {
         Scanner sc=new Scanner(System.in);
+
         int ch;
-        System.out.println(" Hello!\n");
-        System.out.println("Enter \n1. Accomodation \n 2. Dine\n ");
+        System.out.println(" Hello!");
+        System.out.println("Enter 1. Accomodation  2. Dine");
         ch=sc.nextInt();
         return ch;
     }

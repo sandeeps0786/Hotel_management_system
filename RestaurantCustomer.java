@@ -1,4 +1,4 @@
-package designPatterns.project;
+package com.company;
 class RestaurantCustomer extends Customer
 {
 
@@ -26,12 +26,13 @@ class RestaurantCustomer extends Customer
     {
 
         super.printCustomer();
-        if(orderStatus==1 )
+        if(orderStatus==1)
         {
             System.out.println("Dish Name :: "+d.dishName);
             System.out.println("Dish Type :: "+d.dishType);
 
-        }}
+        }
+    }
     void viewTotalBill()
     {
         this.dbill=d.price;

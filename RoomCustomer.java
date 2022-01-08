@@ -1,4 +1,4 @@
-package designPatterns.project;
+package com.company;
 
 
 class RoomCustomer extends Customer
@@ -17,13 +17,11 @@ class RoomCustomer extends Customer
 
     @Override
     void allocateDish(Dish d1) {
-
     }
 
     @Override
     void checkout() {
-
-    }
+     }
 
     public void printCustomer()
     {

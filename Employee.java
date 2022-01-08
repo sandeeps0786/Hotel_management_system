@@ -1,4 +1,4 @@
-// Strategy Interface
+package com.company;// Strategy Interface
 
 public interface Employee {
 	
@@ -27,15 +27,18 @@ class Waiter implements Employee
 }
 
 
-// Context class
 
 class SelectEmployee
 {
-	protected Employee emp;
+	 Employee emp;
 	
 	public SelectEmployee(Employee emp)
 	{
 		this.emp=emp;
+	}
+	public SelectEmployee()
+	{
+
 	}
 	
 	public void performDuty()
